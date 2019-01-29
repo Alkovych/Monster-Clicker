@@ -2,14 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitHelper : MonoBehaviour {
+public class HitHelper : MonoBehaviour
+{
     // Sctipts located on Monster prefab
 
+    private ButtonHelper buttonHelper;
+
+    void Start()
+    {
+        buttonHelper = GameObject.FindObjectOfType<ButtonHelper>();
+    }
 
     private void OnMouseDown()
     {
-        GetComponent<Animator>().SetTrigger("GetHit"); // Play Monster Hit animation when pressed left mouse button
-        GetComponent<HealthHelper>().GetHitMethod(20);
+        if (buttonHelper.isPoused == false)
+        {
+            //Time.timeScale = 0;
+            GetComponent<Animator>().SetTrigger("GetHit"); // Play Monster Hit animation when pressed left mouse button
+            GetComponent<HealthHelper>().GetHitMethod(20);
+        }
 
     }
 }

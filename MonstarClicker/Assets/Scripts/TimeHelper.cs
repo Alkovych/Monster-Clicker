@@ -9,10 +9,12 @@ public class TimeHelper : MonoBehaviour{
     private float endTime = 2.0f;
 
     private GameHelper gameHelper;
+    private ButtonHelper buttonHelper;
 
     void Start()
     {
         gameHelper = GameObject.FindObjectOfType<GameHelper>();
+        buttonHelper = GameObject.FindObjectOfType<ButtonHelper>();
     }
 
     void Update()
@@ -26,6 +28,17 @@ public class TimeHelper : MonoBehaviour{
             {
                 startTime = 0;
                 gameHelper.SpawnMonster();
+            }
+        }
+
+        if (buttonHelper.isTurnedOf == true)
+        {
+            startTime += 0.8f * Time.deltaTime;
+
+            if (startTime >= endTime)
+            {
+                startTime = 0;
+                buttonHelper.isTurnedOf = false;
             }
         }
     }

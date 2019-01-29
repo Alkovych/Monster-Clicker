@@ -28,6 +28,6 @@ public class BenefitHelper : MonoBehaviour
 
     public void GoldMonsterUpdateFunction(float _health)
     {
-        monsterGold =(int) Mathf.Sqrt(_health);
+        monsterGold = (int)Mathf.Sqrt(_health);
     }
 }

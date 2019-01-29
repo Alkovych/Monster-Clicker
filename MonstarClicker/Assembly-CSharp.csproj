@@ -61,10 +61,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BarHelper.cs" />
     <Compile Include="Assets\Scripts\BenefitHelper.cs" />
+    <Compile Include="Assets\Scripts\ButtonHelper.cs" />
     <Compile Include="Assets\Scripts\GameHelper.cs" />
     <Compile Include="Assets\Scripts\HealthHelper.cs" />
     <Compile Include="Assets\Scripts\HitHelper.cs" />
+    <Compile Include="Assets\Scripts\ItemsHelper.cs" />
     <Compile Include="Assets\Scripts\TimeHelper.cs" />
     <None Include="Assets\Sprites\Cartoon Temple Building Kit\ReadMe.txt" />
     <Reference Include="UnityEditor.StandardEvents">

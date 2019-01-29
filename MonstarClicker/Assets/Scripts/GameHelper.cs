@@ -16,8 +16,8 @@ public class GameHelper : MonoBehaviour
     private Text playerGoldUI; // player gold text
     [SerializeField]
     private Text playerRubyUI; // player ruby text
-    [SerializeField]
-    private Text monsterHP; // monster hp text on main scene
+   // [SerializeField]
+    //private Text monsterHP; // monster hp text on main scene
 
     [Header("Prefabs objects")]
     [SerializeField]
@@ -36,7 +36,6 @@ public class GameHelper : MonoBehaviour
     private int index = 0; // current index. Created to spawn monster one by one in array. At the begining index = 0 but increase after each monster death.
     private float startTime; // timer to spawn next monster after privious monster death 
     private float endTime = 3.0f;
-    private int monsterLevel = 1;
     private int playerRuby;
 
     [Header("Script refenrences")]
@@ -44,8 +43,6 @@ public class GameHelper : MonoBehaviour
     private BenefitHelper benefitHelper; // reference to another script located on the scene
 
     [Header("Image")]
-    [SerializeField]
-    private Image healthBar; // Monster health bar
     public Sprite[] monsterImageArray;
     public Image monsterImage;
 
@@ -85,12 +82,6 @@ public class GameHelper : MonoBehaviour
     }
     #endregion
 
-    public float MonsterLevel
-    {
-        get { return monsterLevel; }
-    }
-
-
 
     void Start()
     {
@@ -115,8 +106,6 @@ public class GameHelper : MonoBehaviour
         monsterImage.sprite = monsterImageArray[1];
 
         Destroy(tombStoneObj, 1.9f);// Destroying tombstone after 1 second after spawn
-        MonsterLevelUpdateFanction();
-
     }
 
     //After monster`s death that function take gold and instantiated gold prefabs with animation. Destroying after 2 seconds
@@ -127,7 +116,7 @@ public class GameHelper : MonoBehaviour
         GameObject goldObject = Instantiate(goldPrefab) as GameObject;
         Destroy(goldObject, 2);
         index++;
-        MonsterHealthUpdate();
+
         isDead = true; // checks if monsters dead. If dead, switching to true and allows timer starts counting .
 
     }
@@ -139,27 +128,7 @@ public class GameHelper : MonoBehaviour
 
         monsterObject.transform.position = monsterStartPoint.position + new Vector3(0, 2, 0);
 
-        MonsterHealthUpdate();
-
         monsterImage.sprite = monsterImageArray[index];
     }
 
-    public void HealthBarUpdate(float health)// checks monster health and updated after each hit from players or comrades
-    {
-        healthBar.fillAmount = health / 100.0f;
-        monsterHP.text = health.ToString();
-
-    }
-
-    private void MonsterLevelUpdateFanction()
-    {
-        monsterLevel += 1;
-    }
-
-    public void MonsterHealthUpdate()
-    {
-        float _health = healthHelper.GetGetmonsterHealth();
-        _health += (Mathf.Pow(MonsterLevel, 2) / 2);
-        healthHelper.SetMonsterHealth(_health);
-    }
 }

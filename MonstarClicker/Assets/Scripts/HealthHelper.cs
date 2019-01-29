@@ -11,6 +11,9 @@ public class HealthHelper : MonoBehaviour
 
     private GameHelper gameHelper;
     private BenefitHelper benefitHelper;
+    private BarHelper barHelper;
+    private float _health;
+
 
     [SerializeField]
     private float startHealth = 100;
@@ -18,7 +21,7 @@ public class HealthHelper : MonoBehaviour
     #region Player Gold Set and Get function
     public void SetMonsterHealth(float startHealth)
     {
-            this.startHealth = startHealth;
+        this.startHealth = startHealth;
     }
     public float GetGetmonsterHealth()
     {
@@ -30,17 +33,26 @@ public class HealthHelper : MonoBehaviour
     {
         gameHelper = FindObjectOfType<GameHelper>();
         benefitHelper = FindObjectOfType<BenefitHelper>();
+        barHelper = FindObjectOfType<BarHelper>();
+
+        startHealth = barHelper.MonsterHealthUpdate(startHealth);
+        benefitHelper.GoldMonsterUpdateFunction(startHealth);
+
+        barHelper.HealtBar = startHealth;
+        barHelper.HealthBarText = startHealth;
     }
 
     public void GetHitMethod(float damage)
     {
-        float _health = startHealth - damage;
-        gameHelper.HealthBarUpdate(_health);
+        _health = startHealth - damage;
+
+        barHelper.HealthBarUpdate(_health);
+
 
         if (_health <= 0)
         {
             gameHelper.TakeGold(benefitHelper.GetGold());
-            Destroy(gameObject);
+            Destroy(gameObject);     
 
         }
         else
@@ -48,6 +60,5 @@ public class HealthHelper : MonoBehaviour
             startHealth = _health;
         }
     }
-
 
 }
