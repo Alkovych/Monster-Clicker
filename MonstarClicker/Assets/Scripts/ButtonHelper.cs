@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonHelper : MonoBehaviour
 {
@@ -8,6 +9,14 @@ public class ButtonHelper : MonoBehaviour
     public bool isTurnedOf = false;
 
     public GameObject shopPanel;
+    public DamageHelper damageHelper;
+
+
+
+    void Start()
+    {
+        damageHelper = GameObject.FindObjectOfType<DamageHelper>();
+    }
 
     public void Shop()
     {
@@ -25,5 +34,11 @@ public class ButtonHelper : MonoBehaviour
             shopPanel.layer = LayerMask.NameToLayer("ShopLayer");
             shopPanel.GetComponent<Animator>().SetTrigger("ShopWindowUp");
         }
+    }
+
+    public void FirstUpgrade()
+    {
+        int firstWeapon = 1;
+        damageHelper.SetDamageFunction(firstWeapon);
     }
 }

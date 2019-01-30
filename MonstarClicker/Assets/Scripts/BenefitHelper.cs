@@ -6,12 +6,12 @@ public class BenefitHelper : MonoBehaviour
 {
     [Header("Gold and Ruby variables")]
 
-    private int monsterGold = 100; // Mons
+    private int monsterGold = 0; // Mons
 
     #region Monster Gold set and get functions
     public void SetGold(int monsterGold)
     {
-        if (monsterGold >= 0 && monsterGold <= 10000)
+        if (monsterGold >= 0 && monsterGold <= 1000000)
         {
             this.monsterGold = monsterGold;
         }
@@ -28,6 +28,9 @@ public class BenefitHelper : MonoBehaviour
 
     public void GoldMonsterUpdateFunction(float _health)
     {
-        monsterGold = (int)Mathf.Sqrt(_health);
+        monsterGold = (int)_health;
+
+        //(int)Mathf.Sqrt()
+
     }
 }
